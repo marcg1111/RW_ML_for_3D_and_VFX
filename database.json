@@ -1,0 +1,19 @@
+{
+    "Items": {
+        "LYRZDK": {
+            "name": "banana",
+            "type": "fruit",
+            "price": 0.44
+        },
+        "LYRDOS": {
+            "name": "apple",
+            "type": "fruit",
+            "price": 0.25
+        },
+        "YRZLDK": {
+            "name": "carrot",
+            "type": "vegetable",
+            "price": 0.55
+        }
+    }
+}

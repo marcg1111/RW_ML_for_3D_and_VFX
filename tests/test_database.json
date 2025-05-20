@@ -1,0 +1,19 @@
+{
+    "Items": {
+        "DNQBRL": {
+            "name": "banana",
+            "type": "fruit",
+            "price": 1.0
+        },
+        "AMQNFC": {
+            "name": "apple",
+            "type": "fruit",
+            "price": 2.0
+        },
+        "FIZAAF": {
+            "name": "pineapple",
+            "type": "fruit",
+            "price": 1.0
+        }
+    }
+}
