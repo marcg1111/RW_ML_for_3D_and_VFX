@@ -1,0 +1,19 @@
+{
+    "Items": {
+        "SCMGQS": {
+            "name": "book_a",
+            "genre": "Sci-Fi",
+            "year": 1990
+        },
+        "YTRNEX": {
+            "name": "book_b",
+            "genre": "Fantasy",
+            "year": 2021
+        },
+        "BDSQII": {
+            "name": "book_c",
+            "genre": "Selfe care",
+            "year": 2025
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "Items": {
+        "XLPWID": {
+            "name": "book_a",
+            "genre": "Sci-Fi",
+            "year": 1990
+        },
+        "FIWGRG": {
+            "name": "book_b",
+            "genre": "Fantasy",
+            "year": 2021
+        },
+        "HAPYUW": {
+            "name": "book_c",
+            "genre": "Selfe care",
+            "year": 2025
+        }
+    }
+}
