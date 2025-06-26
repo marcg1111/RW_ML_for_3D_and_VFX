@@ -1,0 +1,7 @@
+Inside the houdini file 'a_star_test001.hip' from https://github.com/pixelknit/rebelwayAppliedML/tree/houdini/a_star:
+
+place the code snippets as following:
+--> a_star_houdini_executive.py in the HDA as a python module
+--> a_star_houdini_python_SOP.py inside a python SOP node
+
+The button Execute(execute) runs the Callback Script: hou.phm().solve_maze()
