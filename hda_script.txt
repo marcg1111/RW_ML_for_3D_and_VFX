@@ -1,0 +1,72 @@
+#HDA Parameters:
+#Button, Name=predict_image, Label=Predict Image, Callback Script=kwargs["node"].hdaModule().execute()
+#String, Name=image_path, Label=Image Path
+
+import torch
+import torch.nn as nn
+from PIL import Image
+from torchvision import datasets, transforms
+import torch.nn.functional as F
+
+FASHION_MNIST_CLASSES = [
+    "T-shirt/top",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle boot"
+]
+
+class CNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(1, 32, 3, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.conv2 = nn.Conv2d(32, 64, 3, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
+        self.dropout = nn.Dropout(0.5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(64*7*7, 128)
+        self.fc2 = nn.Linear(128, 10)
+
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = torch.flatten(x, 1)
+        x = F.relu(self.fc1(x))
+        return self.fc2(x)
+
+def execute():
+    model = CNN()
+    model_path = r"C:\Users\marcg\OneDrive\rebelway_ML_for_3D_and_VFX\WT_WEEK03_ASSIGNMENT\fashion_mnist_cnn.pth"
+    model.load_state_dict(torch.load(model_path, weights_only=True, map_location=torch.device('cpu')))
+    print("CNN loaded!")
+    model.eval()
+    
+    image_path = hou.pwd().parm('image_path').eval()
+    image = Image.open(image_path).convert('L')
+    transform = transforms.Compose([
+        transforms.Resize((28,28)),
+        transforms.ToTensor(),
+        transforms.Normalize((0.5,), (0.5,))
+    ])
+
+    image = transform(image)
+    image = image.unsqueeze(0)
+
+    with torch.inference_mode():
+        output = model(image)
+        prediction_index = torch.argmax(output).item()
+        
+    prediction_name = FASHION_MNIST_CLASSES[prediction_index]
+    
+    print(f"Prediction: {prediction_name}")
+    
+    probs = torch.softmax(output, dim=1)
+    confidence = probs[0, prediction_index].item()
+
+    print(f"Prediction: {prediction_name} ({confidence:.2%})")
